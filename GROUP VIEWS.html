@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group point of view</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+            font-size: 20px;
+        }
+        .animation {
+            font-size: 60px;
+            font-weight: bold;
+            color: #ff5933;
+            animation: spin 8s linear infinite;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+         .suggestion-box {
+            margin-bottom: 20px;
+        }
+         .suggestion-box label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            display: block;
+         }
+         .suggestion-box textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            min-height: 100px;
+         }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .edit-btn {
+            background-color: #ccc;
+            color: #333;
+        }
+        .confirm-btn {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+        .continue-btn {
+            background-color: #007BFF;
+            color: #fff;
+        }
+       .error-msg {
+            color: red;
+            font-weight: bold;
+            font-size: 16px;
+       }
+        select, input[type="text"] {
+            width: 85%;
+            padding: 15px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="animation">BCE Group 12</div>
+
+<div class="section" id="registrationSection">
+  <p>Naitwa <b>Emmanuel Herman Simbasana</b>, Ni mwanafunzi wa mwaka wa kwanza kutoka Chuo kikuu cha Sayansi na Taknolojia(MUST) kampasi kuu ya Mbeya. Na hapa ninakusanya maoni juu ya utendaji kazi wa viongozi wa group hili <a  href="https://chat.whatsapp.com/Be9zLQ5f0Np32Q3pUrzdLb">(BCE Group 12)</a> wa mwaka wa masomo 2023/2024, tafadhali toa ushirikiano wako kwa kujaza fomu hii kadri ya uelewa wako usipuuze nakuomba</p>
+    <h2>Weka namba yako ya usajili(Registration Number):</h2>
+  <p><i>(hakikisha namba unayoandika inaleta jina lako)</i></p>
+    <input type="text" maxlength="14" id="registrationNumber" placeholder="Mf.23100334030xxx...">
+    <button class="continue-btn" onclick="showDetails()">Endelea</button>
+        <p class="error-msg hidden" id="errorMsg">⚠Haujaweka namba yoyote, huwezi kuacha wazi hii sehemu tafadhali jaza hiyo sehemu juu hapo.</p>
+</div>
+    
+<div class="section hidden" id="detailsSection">
+    <h2>Taarifa zako</h2>
+  <b><p id="userName"></p></b>
+  <b><p id="userGender"></p></b>
+    <button class="edit-btn" onclick="editDetails()">Hariri</button>
+    <button class="confirm-btn" onclick="confirmDetails()">Thibitisha</button>
+</div>
+
+<div class="suggestion-box hidden" id="suggestionSection">
+    <h2>Maoni yako:</h2>
+  <label for="holidaySuggestion">Je ni kitu gani <u><i>uliridhishwa</i></u> na utendaji kazi wa viongozi hawa waliokuwa wanakuongoza?:</label>
+    <textarea type="text" id="holidaySuggestion" rows="4" placeholder="weka maoni yako hapa..."></textarea>
+    <button class="continue-btn" onclick="submitSuggestion()">Endelea</button>
+</div>
+  
+  <div class="suggestion-box hidden" id="unsatisfiedSection">
+    <h2>Maoni yako:</h2>
+  <label for="unsatisfiedSuggestion">Vipi je, ni kitu gani <u><i>hukuridhishwa</i></u> na utendaji kazi wa viongozi hawa waliokuwa wanakuongoza?</label>
+    <textarea type="text" id="unsatisfiedSuggestion" rows="4" placeholder="weka maoni yako hapa..."></textarea>
+    <button class="continue-btn" onclick="sendSuggestion()">Endelea</button>
+</div>
+
+<div class="section hidden" id="choiceSection">
+    <h2>Picha halisi uliyoiona:</h2>
+      <p>Je utendaji kazi wa viongozi hawa waliokuwa wanakuongoza uliuonaje?</p>
+    <select style="padding: 20px;" id="choice">
+        <option value="">wazo lako </option>
+        <option value="Mzuri sana">Mzuri sana</option>
+        <option value="Mzuri">Mzuri</option>
+        <option value="Mbaya">Mbaya</option>
+        <option value="Mbaya sana">Mbaya Sana</option>
+        <option value="Haueleweki">Haueleweki</option>
+    </select>
+    <button class="continue-btn" onclick="submitChoice()">Endelea</button>
+</div>
+
+<div class="suggestion-box hidden" id="adviceSection">
+    <h2>Ushauri wako</h2>
+  <label for="holidayAdvice">Ni nini unashauri kwa viongozi wajao wa gropu hili wafanye ili waendelee zaidi na wawe msaada kufikia ndoto zako?</label>
+    <textarea type="text" id="holidayAdvice" rows="4" placeholder="weka ushauri wako hapa..."></textarea>
+    <button class="continue-btn" onclick="submitAdvice()">Endelea</button>
+</div>
+
+  <div class="section hidden" id="nameSelectionSection">
+    <h2>Chaguo lako</h2>
+    <p>Je ungependa kuwa na viongozi gani kwa mwaka wa masomo 2024/2025?</p>
+    <p><i>(Tafadhali chagua wawili tu)</i></p>
+    <select style="padding: 20px;" id="nameSelect" multiple size="10">
+        <option value="EDWIN ESSAU">EDWIN ESSAU</option>
+        <option value="EMMANUEL SIMBASANA">EMMANUEL SIMBASANA</option>
+        <option value="FAHAD HASSAN">FAHAD HASSAN</option>
+        <option value="JAPHET MALIMA">JAPHET MALIMA</option>
+        <option value="LEONARD MBILIZI">LEONARD MBILIZI</option>
+        <option value="MUSSA MAGAFU">MR. NORMAN</option>
+        <option value="MWAMINI MBAROUK">MADAM MWAMINI</option>
+        <option value="PETRO MABULA">PETRO MABULA</option>
+        <option value="RASHID SASAGU">RASHID SASAGU</option>
+        <option value="SHALOM NZENA">SHALOM NZENA</option>
+    </select>
+    <button style="display: none;" class="continue-btn" id="continueButn" onclick="checkSelection()">Endelea</button>
+</div>
+  
+<div class="section hidden" id="previewSection">
+    <h2>Taarifa zako:</h2>
+  <p style="color: rgb( 180, 20, 5);"><i>Hakiki taarifa zako hapa chini ulizojaza kwenye fomu hii kabla ya kuzituma kwangu.</i></p>
+    <p id="previewName"></p>
+    <p id="previewGender"></p>
+    <p id="previewSuggestion"></p>
+    <p id="previewBadSuggestion"></p>
+    <p id="previewChoice"></p>
+    <p id="previewAdvice"></p>
+    <p id="previewSelection"></p>
+    <button class="continue-btn" onclick="sendInformation()">Tuma</button>
+</div>
+
+<script>
+    function showDetails() {
+        const regNum = document.getElementById('registrationNumber').value;
+        const detailsSection = document.getElementById('detailsSection');
+        const userName = document.getElementById('userName');
+        const userGender = document.getElementById('userGender');
+
+        if (regNum === "23100334030213") {
+            userName.textContent = "Jina: EMMANUEL HERMAN SIMBASANA";
+            userGender.textContent = "Jinsi: ME";
+            document.getElementById('errorMsg').style.display = 'hidden';
+            detailsSection.classList.remove('hidden');
+        } else if (regNum === "23100334030123") {
+            userName.textContent = "Jina: MWAMINI HASSAN MBAROUK";
+            userGender.textContent = "Jinsi: KE";
+            document.getElementById('errorMsg').style.display = 'hidden';
+            detailsSection.classList.remove('hidden');
+        } else if (regNum === "23100334030187") {
+            userName.textContent = "Jina: SHALOM AUGUSTINO NZENA";
+            userGender.textContent = "Jinsi: ME";
+            document.getElementById('errorMsg').style.display = 'hidden';
+            detailsSection.classList.remove('hidden');
+        } else if (regNum === "23100334030235") {
+            userName.textContent = "Jina: RASHID MATI SASAGU";
+            userGender.textContent = "Jinsi: ME";
+            document.getElementById('errorMsg').style.display = 'hidden';
+            detailsSection.classList.remove('hidden');
+        } else if (regNum === "23100334030043") {
+            userName.textContent = "Jina: MUSSA MAGAFU RICHARD";
+            userGender.textContent = "Jinsi: ME";
+            document.getElementById('errorMsg').style.display = 'hidden';
+            detailsSection.classList.remove('hidden');
+        } else if (regNum === "23100334030015") {
+            userName.textContent = "Jina: EDWIN KAMUGISHA ESSAU";
+            userGender.textContent = "Jinsi: ME";
+            document.getElementById('errorMsg').style.display = 'hidden';
+            detailsSection.classList.remove('hidden');
+        } else if (regNum === "23100334030030") {
+            userName.textContent = "Jina: FAHAD MUSWADICK HASSAN";
+            userGender.textContent = "Jinsi: ME";
+            document.getElementById('errorMsg').style.display = 'hidden';
+            detailsSection.classList.remove('hidden');
+        } else if (regNum === "23100334030152") {
+            userName.textContent = "Jina: JAPHET MALIMA MGUSI";
+            userGender.textContent = "Jinsi: ME";
+            document.getElementById('errorMsg').style.display = 'hidden';
+            detailsSection.classList.remove('hidden');
+        } else if (regNum === "23100334030049") {
+            userName.textContent = "Jina: PETRO MABULA BONIPHACE";
+            userGender.textContent = "Jinsi: ME";
+            document.getElementById('errorMsg').style.display = 'hidden';
+            detailsSection.classList.remove('hidden');
+        } else if (regNum === "23100334030007") {
+            userName.textContent = "Jina: LEONARD MBILIZI BARTHOLOMEO";
+            userGender.textContent = "Jinsi: ME";
+            document.getElementById('errorMsg').style.display = 'hidden';
+            detailsSection.classList.remove('hidden');
+        } else if (regNum.trim() === "") {
+            document.getElementById('errorMsg').style.display = 'block';
+        } else {
+            alert("⚠Namba uliyoweka ni batili au sio ya group hili, Tafadhali weka namba yako kwa usahihi.");
+        }
+    }
+
+    function editDetails() {
+        document.getElementById('detailsSection').classList.add('hidden');
+        document.getElementById('registrationNumber').value = '';
+        document.getElementById('errorMsg').style.display = 'hidden';
+    }
+
+    function confirmDetails() {
+        document.getElementById('detailsSection').classList.add('hidden');
+        document.getElementById('suggestionSection').classList.remove('hidden');
+        document.getElementById('errorMsg').style.display = 'hidden';
+    }
+
+    function submitSuggestion() {
+        const suggestion = document.getElementById('holidaySuggestion').value;
+        if (suggestion.trim() === "") {
+            alert("Tafadhali weka maoni📝.");
+            return;
+        }
+        document.getElementById('suggestionSection').classList.add('hidden');
+        document.getElementById('unsatisfiedSection').classList.remove('hidden');
+    }
+  
+  function sendSuggestion() {
+    const badSuggestion = document.getElementById('unsatisfiedSuggestion').value;
+    if (badSuggestion.trim() === "") {
+      alert('usiache kuweka maoni, Tafadhali weka maoni yako ni muhimu sana.');
+       return;
+    }
+      document.getElementById('unsatisfiedSection').classList.add('hidden');
+      document.getElementById('choiceSection').classList.remove('hidden');
+  }
+  
+    function submitChoice() {
+        document.getElementById('choiceSection').classList.add('hidden');
+        document.getElementById('adviceSection').classList.remove('hidden');
+    }
+
+    function submitAdvice() {
+        const advice = document.getElementById('holidayAdvice').value;
+        if (advice.trim() === "") {
+            alert("Tafadhali weka ushauri wako usiache wazi.");
+            return;
+        }
+        document.getElementById('adviceSection').classList.add('hidden');
+        document.getElementById('nameSelectionSection').classList.remove('hidden');
+    }
+
+        const select = document.getElementById('nameSelect');
+        const continueButton = document.getElementById('continueButn'); 
+        select.addEventListener('change', checkSelection);
+        continueButton.addEventListener('click',handleContinueClick);
+    function checkSelection(){
+        const selectedOptions = Array.from(select.selectedOptions);
+  
+        if (selectedOptions.length > 2) {
+            selectedOptions[0].selected = false;
+            alert('Umechagua watu zaidi ya wawili, Chagua wawili tu ndipo utaruhusiwa kuendelea.');
+        }
+ 
+  continueButton.style.display = selectedOptions.length === 2 ? 'block' : 'none';
+    }
+     function handleContinueClick(){
+       const selectedOptions = Array.from(select.selectedOptions);
+       
+       if(selectedOptions.length !== 2){
+          alert('Tafadhali chagua watu wawili tu.');
+          return;
+       }
+       
+       const selectedValues = selectedOptions.map( option => option.value);
+        
+       if(selectedValues.includes('EMMANUEL SIMBASANA') && selectedValues.includes('MWAMINI MBAROUK'))
+       {
+         alert('Umechagua EMMANUEL SIMBASANA na MADAM MWAMINI kwa pamoja, Tafadhali chagua watu wengine(la sivyo hutaruhusiwa kuendelea), huu ni mwaka mwingine');
+         return;
+       }
+       
+        document.getElementById('nameSelectionSection').classList.add('hidden');
+        document.getElementById('previewSection').classList.remove('hidden');
+      
+        document.getElementById('previewName').textContent = document.getElementById('userName').textContent;
+        document.getElementById('previewGender').textContent = document.getElementById('userGender').textContent;
+        document.getElementById('previewSuggestion').textContent = "Maoni yako juu ya yale uliridhishwa na viongozi:👉 " + document.getElementById('holidaySuggestion').value;
+        document.getElementById('previewBadSuggestion').textContent = "Maoni yako juu ya yale hukuridhishwa na viongozi:👉 " + document.getElementById('unsatisfiedSuggestion').value;
+        document.getElementById('previewChoice').textContent = "Namna uongozi ulivyoutazama:👉 " + document.getElementById('choice').value;
+        document.getElementById('previewAdvice').textContent = "Ushauri wako:👉 " + document.getElementById('holidayAdvice').value;
+        document.getElementById('previewSelection').textContent = "Uchaguzi wako juu ya viongozi wajao:👉 " + selectedOptions.map( option => option.value).join(' na ');
+   
+    }
+
+    function sendInformation() {
+        alert("Asante, Taarifa zimetumwa kikamilifu. EMMANUEL SIMBASANA anajali maoni yako ya thamani!");
+        location.reload();
+    }
+</script>
+
+</body>
+</html>
